@@ -66,7 +66,7 @@ const Section4 = () => {
         <div className="w-full lg:w-[75%]">
           <div className="h-[10vh] w-full flex justify-between p-4 items-center bg-[#F3F4F6]">
             <p className="text-base sm:text-lg md:text-xl font-semibold">Mobiles & Tablets</p>
-            <p className="text-base sm:text-lg md:text-xl"  onClick={()=>navigate("/filter",{state:data?.data?.data[1]?.id},{state:data?.data?.data[1]?.category_id})}>See All</p>
+            <p className="text-base sm:text-lg md:text-xl"  onClick={()=>navigate("/filter",{state:data?.data?.data[1]?.id})}>See All</p>
           </div>
           
 

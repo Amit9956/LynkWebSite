@@ -12,7 +12,7 @@ const Section3 = () => {
     queryFn: () => GetMainCategory(),
   });
 
-  console.log(data,"data from book")
+  // console.log(data,"data from book")
 
   const navigate = useNavigate()
 

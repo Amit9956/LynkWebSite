@@ -275,7 +275,7 @@ const Navbar = () => {
                 onMouseEnter={() => setHoveredCategory(cat.id)}
                 onMouseLeave={() => setHoveredCategory(null)}
               >
-                <p   onClick={()=>navigate("/filter",{state:{c_id:cat.id}})} className="hover:bg-gray-300 hover:rounded-sm h-full font-semibold pt-1 text-clip w-full hover:text-blue-600 hover:underline transition-all duration-500 cursor-pointer bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text" >
+                <p onClick={()=>navigate("/filter",{state:{c_id:cat?.id}})} className="hover:bg-gray-300 hover:rounded-sm h-full font-semibold pt-1 text-clip w-full hover:text-blue-600 hover:underline transition-all duration-500 cursor-pointer bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text" >
                   {cat.category}
                 </p>
                 {hoveredCategory === cat.id && (
