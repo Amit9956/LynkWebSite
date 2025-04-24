@@ -1,5 +1,5 @@
 import axios from "axios"
-import { BaseUrl, Token } from "../../Config/BaseUrl"
+import axiosInstance, { BaseUrl, Token } from "../../Config/BaseUrl"
 import { EndPoints } from "../../Config/EndPoints"
 
 
@@ -7,10 +7,8 @@ export const  GetMainCategory=()=>{
 
     try{
 
-        const response = axios.get(BaseUrl+EndPoints.mainCat,{
-            headers:{
-                Authorization:Token
-            }
+        const response = axiosInstance.get(EndPoints.mainCat,{
+          
         })
         return response;
     }catch(e){

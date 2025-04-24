@@ -1,13 +1,11 @@
 import axios from "axios";
-import { BaseUrl, Token } from "../../Config/BaseUrl";
+import axiosInstance, { BaseUrl, Token } from "../../Config/BaseUrl";
 import { EndPoints } from "../../Config/EndPoints";
 
 export const GetBrandlistFn = () => {
   try {
-    const response = axios.get(BaseUrl + EndPoints.linearImages, {
-      headers: {
-        Authorization:Token,
-      },
+    const response = axiosInstance.get(EndPoints.linearImages, {
+     
     });
     return response;
   } catch (e) {

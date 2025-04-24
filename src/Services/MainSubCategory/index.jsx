@@ -1,5 +1,5 @@
 import axios from "axios"
-import { BaseUrl, Token } from "../../Config/BaseUrl"
+import axiosInstance, { BaseUrl, Token } from "../../Config/BaseUrl"
 import { EndPoints } from "../../Config/EndPoints"
 
 
@@ -8,7 +8,7 @@ export const MainSubApi = ()=>{
 
     try{
 
-        const response =axios.get(BaseUrl+EndPoints.mainSubCat,{
+        const response =axiosInstance.get(EndPoints.mainSubCat,{
             headers:{
                 Authorization:Token
             }

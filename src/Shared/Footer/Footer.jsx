@@ -73,7 +73,7 @@ const Footer = () => {
 
         <div className="w-full text-center py-4 px-4 text-sm sm:text-base">
           <p>
-            ©2023 CRAZZYHUB RETAIL PVT. LTD. All Rights Reserved | Designed by Aara Technologies Pvt. Ltd.
+            ©2023 CRAZZYHUB RETAIL PVT. LTD. All Rights Reserved | Designed by Amit.
           </p>
         </div>
       </div>

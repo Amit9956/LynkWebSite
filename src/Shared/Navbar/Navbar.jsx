@@ -15,11 +15,14 @@ import { BsTv } from "react-icons/bs";
 import { GrTechnology } from "react-icons/gr";
 import { GrUserSettings } from "react-icons/gr";
 import { HiBuildingStorefront } from "react-icons/hi2";
+import LoginModal from "../../Components/Modal";
 
 const Navbar = () => {
   const [hoveredCategory, setHoveredCategory] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [data1, setData] = useState();
+
+  const [open, setOpen] = React.useState(false);
 
   const GetCat = async () => {
     const data = await MainSubApi();
@@ -208,18 +211,18 @@ const Navbar = () => {
         <div className="hidden md:flex w-full md:w-1/2 h-[10vh] items-center justify-end bg-gradient-to-r from-[#24A1D6] to-[#F0751F] px-4">
           <div className="flex w-full md:w-[70%] justify-between items-center font-semibold text-md text-white ">
             <div>
-              <p>Wishlist</p>
+              <p onClick={()=>navigate("/wishlistCard")}>Wishlist</p>
               <p className="font-semibold flex gap-x-2 text-red-500">
                 2 Items <FaHeart className="text-2xl" />
               </p>
             </div>
-            <div>
+            <div onClick={()=>navigate("/cart")}>
               <p>0 Items</p>
               <p className="font-semibold flex gap-x-2 text-yellow-400">
                 ₹0 <MdShoppingCart className="text-2xl" />
               </p>
             </div>
-            <div onClick={()=>navigate("/login")}>
+            <div onClick={()=>setOpen(true)}>
               <p>My Account</p>
               <p className="font-semibold flex gap-x-2 text-cyan-400">
                 Sign In <MdOutlinePeopleAlt className="text-2xl" />
@@ -426,6 +429,9 @@ const Navbar = () => {
         </div>
       </div>
     </Drawer>
+
+
+<LoginModal setOpen={setOpen}  open={open}/>
     </div>
   );
 };

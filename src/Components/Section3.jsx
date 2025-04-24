@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { GetMainCategory } from "../Services/MainCategory/index,jsx";
+import { GetMainCategory } from "../Services/MainCategory/index.jsx";
 import Slider from "react-slick";
 import { useNavigate } from "react-router-dom";
 import { Skeleton } from "@mui/material";

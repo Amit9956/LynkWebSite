@@ -1,5 +1,5 @@
 import React from "react";
-import { GetMainCategory } from "../Services/MainCategory/index,jsx";
+import { GetMainCategory } from "../Services/MainCategory/index.jsx";
 import { useQuery } from "@tanstack/react-query";
 import { Slider } from "@mui/material"; // for price range slider
 

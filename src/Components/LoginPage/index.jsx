@@ -1,8 +1,11 @@
 import React from 'react'
 
 const Login = () => {
-  return (<div className='h-screen w-screen flex justify-center bg-transparent items-center'>
-    <div className='h-[65vh] w-[45vw] flex border border-gray-400 rounded-xl'>
+  return (
+  
+  
+//   <div className='h-[100%] w-full flex justify-center bg-transparent items-center  '>
+    <div className='h-[65vh] w-full flex border-none bg-white  rounded-xl'>
         <div className='w-1/2 h-full '>
             <img className='h-full rounded-l-xl' src='https://pub-027efb0add534c4fbed7432cf1c407a1.r2.dev/Assets/login-img.jpeg'/>
         </div>
@@ -26,7 +29,8 @@ const Login = () => {
           
         </div>
     </div>
-    </div>)
+    // </div>
+    )
 }
 
 export default Login
