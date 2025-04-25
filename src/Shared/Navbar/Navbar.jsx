@@ -27,7 +27,7 @@ const Navbar = () => {
   const GetCat = async () => {
     const data = await MainSubApi();
 
-    console.log(data,"helloooo this datahhefwhbvifrvhcihiuhfh");
+    // console.log(data,"helloooo this datahhefwhbvifrvhcihiuhfh");
 
     setData(data);
   };
@@ -171,7 +171,7 @@ const Navbar = () => {
               </div>
               <div>
                 <p className="hidden">My Account</p>
-                <p className="font-semibold flex gap-x-2">
+                <p className="font-semibold flex gap-x-2" onClick={()=>setOpen(true)}>
                   <MdOutlinePeopleAlt className="text-3xl text-cyan-300" />
                 </p>
               </div>
