@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { FaMobileAlt, FaLock } from 'react-icons/fa';
+import toast from 'react-hot-toast';
+
 
 const Login = () => {
   const [showOTP, setShowOTP] = useState(false);
   const [mobile, setMobile] = useState('');
+  const [otp, setOtp] = useState('');
+
 
   const handleLoginClick = async () => {
     try {
@@ -16,34 +20,77 @@ const Login = () => {
         }
       });
 
-      console.log("Response:", response.data);
+      console.log("OTP Sent:", response.data);
       setShowOTP(true);
+      toast.success("OTP sent to your mobile number!");
     } catch (error) {
       console.error("Login API Error:", error);
+      toast.error("Failed to send OTP. Try again.");
     }
   };
 
-  return (
-    <div className='flex justify-center items-center bg-gray-100'>
-      <div className='lg:w-full w-[50%] max-w-5xl flex flex-col md:flex-row bg-white rounded-xl shadow-lg overflow-hidden'>
+
+
+  const handleVerifyClick = async () => {
+    try {
+      const response = await axios.post(
+        "https://app1.crazzyhub.com/api/verify-login-otp/",
+        {
+          mobile_number: mobile,
+          otp: otp
+        },
+        {
+          headers: {
+            Authorization: "7c2b8693d001c79d4b5ed6ebc387ad6b862989dfjhjjhj"
+          }
+        }
+      );
+  
+      console.log("Full response:", response.data);  
+  
     
-        <div className='hidden md:block md:w-1/2 h-full'>
+      if (response.data.registration_token && response.data.registration_token.trim() !== "") {
+        localStorage.setItem("userToken", response.data.registration_token);
+        toast.success("OTP Verified Successfully!");
+        window.location.replace("/");
+      } else {
+      
+        toast.error("Verification failed. Please try again.");
+      }
+  
+    } catch (error) {
+      console.error("OTP Verification Error:", error);
+      toast.error("Invalid OTP. Try again.");
+    }
+  };
+  
+  
+  
+
+
+  return (
+    <div className="flex items-center justify-center bg-gray-100 ">
+      <div className="lg:w-full w-[50%] max-w-4xl bg-white rounded-xl shadow-xl flex flex-col lg:flex-row overflow-hidden">
+
+      
+        <div className="hidden lg:block lg:w-1/2">
           <img
-            className='h-full w-full object-cover'
-            src='https://pub-027efb0add534c4fbed7432cf1c407a1.r2.dev/Assets/login-img.jpeg'
-            alt='Login Visual'
+            className="h-full w-full object-cover"
+            src="https://pub-027efb0add534c4fbed7432cf1c407a1.r2.dev/Assets/login-img.jpeg"
+            alt="Login Visual"
           />
         </div>
 
-        <div className='w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center'>
+        {/* Form section */}
+        <div className="w-full lg:w-1/2 p-6 sm:p-10 flex flex-col justify-center">
           {!showOTP ? (
             <>
-              <h2 className="text-2xl font-semibold text-center mb-1">Welcome Back</h2>
-              <p className="text-gray-600 mb-6 text-center">Sign in to complete your shopping</p>
+              <h2 className="text-2xl font-semibold text-center mb-2">Welcome Back</h2>
+              <p className="text-gray-600 text-center mb-6">Sign in to complete your shopping</p>
 
               <label className="block text-base font-medium mb-2">Mobile Number</label>
-              <div className='relative mb-6'>
-                <span className='absolute inset-y-0 left-0 pl-3 flex items-center text-blue-500'>
+              <div className="relative mb-6">
+                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-blue-500">
                   <FaMobileAlt />
                 </span>
                 <input
@@ -57,7 +104,7 @@ const Login = () => {
 
               <button
                 onClick={handleLoginClick}
-                className="w-full bg-gradient-to-r from-red-500 to-purple-600 hover:bg-gradient-to-l hover:from-purple-500 hover:to-pink-500 hover:scale-95 text-white py-3 rounded-md font-medium transition duration-200"
+                className="w-full bg-gradient-to-r from-red-500 to-purple-600 hover:from-purple-600 hover:to-pink-500 hover:scale-95 transition-transform duration-200 text-white py-3 rounded-md font-medium"
               >
                 Log In
               </button>
@@ -68,17 +115,20 @@ const Login = () => {
             </>
           ) : (
             <>
-              <h2 className="text-2xl font-semibold text-center mb-1">Verify OTP</h2>
-              <p className="text-gray-600 mb-6 text-center">
-                We have sent a one time password to your mobile number {mobile} <span className="text-blue-500 cursor-pointer">Edit</span>
+              <h2 className="text-2xl font-semibold text-center mb-2">Verify OTP</h2>
+              <p className="text-gray-600 text-center mb-6">
+                We’ve sent a one time password to <strong>{mobile}</strong>.{' '}
+                <span className="text-blue-500 cursor-pointer" onClick={() => setShowOTP(false)}>Edit</span>
               </p>
 
-              <div className='relative mb-4'>
-                <span className='absolute inset-y-0 left-0 pl-3 flex items-center text-green-500'>
+              <div className="relative mb-4">
+                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-green-500">
                   <FaLock />
                 </span>
                 <input
                   type="text"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
                   placeholder="Enter OTP"
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
@@ -86,7 +136,10 @@ const Login = () => {
 
               <p className="text-sm text-blue-600 mb-4 cursor-pointer">Resend OTP</p>
 
-              <button className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-md font-medium transition duration-200">
+              <button
+                onClick={handleVerifyClick}
+                className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-md font-medium transition duration-200"
+              >
                 VERIFY
               </button>
             </>

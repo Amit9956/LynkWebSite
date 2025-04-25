@@ -8,6 +8,7 @@ import { routes } from './Routes'
 import Layout from './Layout'
 import { useEffect, useState } from 'react'
 import SplashScreen from './SplashScreen'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
 
@@ -30,7 +31,7 @@ function App() {
     <>
 
 
-
+    <Toaster position="top-center" reverseOrder={false} />
     <BrowserRouter>
       <Routes>
         {
